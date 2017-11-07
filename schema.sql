@@ -1,12 +1,12 @@
 create database cheapoMail;
 use cheapoMail;
-create table users(
+create table usrs(
 	userid int auto_increment not null,
 	userfname varchar(20),
 	userlname varchar(20),
 	username varchar(50),
 	userpassword varchar(50),
-	primary key(usrid) 
+	primary key(userid) 
 );
 create table messages(
 	msgid int auto_increment not null,
@@ -17,7 +17,7 @@ create table messages(
     date_sent date,
 	primary key(msgid) 
 );
-create table meassages_read(
+create table messages_read(
 	msg_rid int auto_increment not null,
 	msgid int not null,
     reader_id int,
@@ -25,4 +25,4 @@ create table meassages_read(
 	primary key(msg_rid) 
 );
 
-insert into users (username,userpassword) values ('admin','password123');
+insert into usrs (username,userpassword) values ('admin','password123');
