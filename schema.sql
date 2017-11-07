@@ -5,7 +5,7 @@ create table usrs(
 	userfname varchar(20),
 	userlname varchar(20),
 	username varchar(50),
-	userpassword varchar(50),
+	userpassword varchar(100),
 	primary key(userid) 
 );
 create table messages(
