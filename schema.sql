@@ -25,4 +25,4 @@ create table messages_read(
 	primary key(msg_rid) 
 );
 
-insert into usrs (username,userpassword) values ('admin','password123');
+insert into usrs (username,userpassword) values ('admin','$2y$10$QnnoiPlmVddeHvnurqFz7.AHERNp7SpE6FvidskykWmBrYYtBSZe.');
