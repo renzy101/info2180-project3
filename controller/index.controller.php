@@ -4,6 +4,8 @@ session_start();
 
 if(!isset($_SESSION['user'])){
     header ("Location: login");
+}else if ($_SESSION['user'] == "admin"){
+    header("Location: admin");
 }else{
     header("Location: home");
 }
