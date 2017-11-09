@@ -8,6 +8,10 @@
     <div class="content">
     	<div class="nav-bar"></div>
     	<form class="login-form buttons">
+    		<div class="signup-login button">
+    			<button class="signup">Add New User</button>
+    			<button class="signup">Logout</button>
+    		</div>
     		<div class="form-login hidden">
 	          <label>First name:<br><input class="required" type="text" placeholder="Ex: Renee"required></label><br>
 	          <label>Last name:<br><input class="required" type="text" placeholder="Ex: Duhaney"required></label><br>
@@ -18,10 +22,7 @@
     			<label>Confirm Password:<br><input class="required" type="password" required></label><br>
     			<label><input class="checkbox required" type="checkbox" required> I accept the terms of service </label>
     		</div>
-    		<div class="signup-login button">
-    			<button class="signup">Add User</button>
-    			<button class="logout">Logout</button>
-    		</div>
+    		<button class="submit signup hidden">Submit User</button>
     	</form>
 	</div>
 <?php require "partials/footer.html"?>

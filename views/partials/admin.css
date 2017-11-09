@@ -1,5 +1,5 @@
 .content {
-	width: 320px;
+	width: 330px;
 	height: 100px;
 	position: relative;
 	margin: auto;
@@ -34,11 +34,12 @@
 }
 
 .content.signup-yes {
-	height: 580px;
+	height: 630px;
 }
 
 .login-form label {
 	color: #53575C;
+	float: left;
 }
 
 .form-login {
@@ -143,7 +144,8 @@
 .login-form .button .login {
 	background-color: #8EA106;
 	box-shadow: 0 3px 0 0 #3D4503;
-	float: right;
+	float: left;
+	clear: right;
 	margin-right: 0;
 }
 

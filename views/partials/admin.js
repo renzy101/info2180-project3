@@ -15,7 +15,7 @@ $(document).ready(function(){
         
            // })
            $('.logout').bind('click',function(){
-               window.location.assign("logout");
+               window.location.assign("logout")
            });
         
             $('.signup').bind('click', function() {
@@ -25,5 +25,6 @@ $(document).ready(function(){
                 $('.form-login').addClass('visible');
                 $('.form-signup').addClass('visible');
                 $('.content').addClass('signup-yes');
+                $('.submit').removeClass('hidden');
             })
 });
