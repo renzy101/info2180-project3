@@ -14,15 +14,17 @@ create table messages(
 	sender_id varchar(20),
 	subject varchar(50),
 	body varchar(50),
-    date_sent date,
+    date_sent datetime,
 	primary key(msgid) 
 );
 create table messages_read(
 	msg_rid int auto_increment not null,
 	msgid int not null,
     reader_id int,
-    date_read date,
+    date_read datetime,
 	primary key(msg_rid) 
 );
+create trigger datetime_on_message_sent before insert on messages for each row set new.date_sent = (UTC_TIMESTAMP());
+create trigger datetime_on_messages_read before insert on messages_read for each row set new.date_read = (UTC_TIMESTAMP());
 
 insert into usrs (username,userpassword) values ('admin','$2y$10$QnnoiPlmVddeHvnurqFz7.AHERNp7SpE6FvidskykWmBrYYtBSZe.');
