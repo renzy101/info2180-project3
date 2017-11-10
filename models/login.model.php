@@ -8,11 +8,18 @@ class loginModel{
     }
     
     public function getUserLoginInfo($user){
-        $selectStatement = $this->connector->prepare('SELECT username, userpassword from usrs WHERE username = :user');
-        $selectStatement->bindParam(':user', $user, PDO::PARAM_STR);
-        if($selectStatement->execute()){
-            return $selectStatement->fetch(PDO::FETCH_ASSOC);
+        try{
+            $selectStatement = $this->connector->prepare('SELECT * from usrs WHERE username = :user');
+            $selectStatement->bindParam(':user', $user, PDO::PARAM_STR);
+            $selectStatement->execute();
+            $result = $selectStatement->fetch(PDO::FETCH_ASSOC);
+            
+            if($result){
+                return $result;
+            }
+            return false;
+        }catch(Exception $e){
+            return false;
         }
-        return false;
     }
 }
