@@ -1,3 +1,26 @@
+body{
+	margin: 0;
+	padding: 0;
+	background: #fff;
+
+	color: #fff;
+	font-family: Arial;
+	font-size: 12px;
+}
+
+.body{
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	right: -40px;
+	bottom: -40px;
+	width: auto;
+	height: auto;
+	background-image: url(http://wallarthd.com/wp-content/uploads/2014/08/Black-Abstract-Monkey-Computer-Wallpaper-2197.jpg);
+	background-size: cover;
+	-webkit-filter: blur(0px);
+	z-index: 0;
+}
 .content {
 	width: 330px;
 	height: 100px;
@@ -7,6 +30,17 @@
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	transition: all .2s ease;
+}
+
+.indexcontent{
+	width: 330px;
+	height: 330px;
+	position: relative;
+	margin: auto;
+	background-color: #D8D8D5;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	transition: all .2s ease;	
 }
 
 .nav-bar {
@@ -65,6 +99,7 @@
 	box-shadow: 0;
 	border: none;
 }
+
 
 .login-form input:focus {
 	border: 1px solid #202020;
@@ -127,23 +162,23 @@
 	top: -20px;
 }
 
-.login-form .button .signup {
+.login-form .button  .signup {
 
-	background-color: #2083EB;
-	box-shadow: 0 3px 0px 0px #0554F2;
+	background-color: #ff0000;
+	box-shadow: 0 3px 0px 0px #990000;
 	float: left;
 }
 
-.login-form .button .signup:hover {
+.login-form .button  .signup:hover {
 
 	top: 3px;
-	background-color: #1861AE;
+	background-color: #ff0000;
 	box-shadow: none;
 }
 
 .login-form .button .login {
-	background-color: #8EA106;
-	box-shadow: 0 3px 0 0 #3D4503;
+	background-color:#ff0000;
+	box-shadow: 0 3px 0 0 #990000;
 	float: left;
 	clear: right;
 	margin-right: 0;
@@ -151,7 +186,7 @@
 
 .login-form .button .login:hover {
 
-	background-color: #5E6B04;
+	background-color: #ff0000;
 	top: 3px;
 	box-shadow: none;
 }
