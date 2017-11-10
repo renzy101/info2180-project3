@@ -10,12 +10,15 @@ if(isset($_POST['username'], $_POST['pass'])){
     
     if($user !== false){
         if($user['username'] === $_POST['username'] && password_verify(strip_tags($_POST['pass']), "{$user['userpassword']}")){
-                $_SESSION["user"] = $user['username'];
-                if($_SESSION["user"] === "admin"){
-                    header("Location: admin");
-                }else{
-                    header("Location: home");
-                }
+            $_SESSION['firstname'] = $user['userfname'];
+            $_SESSION['firstname'] = $user['userlname'];
+            $_SESSION["user"] = $user['username'];
+            
+            if($_SESSION["user"] === "admin"){
+                header("Location: admin");
+            }else{
+                header("Location: home");
+            }
         }else{
             header("Location: login");
         }
