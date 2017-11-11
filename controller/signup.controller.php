@@ -1,7 +1,7 @@
 <?php
 if(!isset($_SESSION['user'])){
     header("Location: index.php");
-}elseif($_SESSION['user'] == 'admin'){
+}elseif($_SESSION['user'] == 'admin' && $_SERVER['REQUEST_METHOD'] == 'POST'){
     //add check for post message with set user variables;
     require "models/signup.model.php";
     

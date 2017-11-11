@@ -2,8 +2,8 @@ create database cheapoMail;
 use cheapoMail;
 create table usrs(
 	userid int auto_increment not null,
-	userfname varchar(20),
-	userlname varchar(20),
+	userfname varchar(20) default "Unidentified",
+	userlname varchar(20) default "Flying User",
 	username varchar(50),
 	userpassword varchar(100),
 	primary key(userid) 

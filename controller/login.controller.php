@@ -7,11 +7,10 @@ if(isset($_POST['username'], $_POST['pass'])){
     $loginMOD = new loginModel();
     $user = $loginMOD->getUserLoginInfo(strip_tags($_POST['username']));
     
-    
     if($user !== false){
         if($user['username'] === $_POST['username'] && password_verify(strip_tags($_POST['pass']), "{$user['userpassword']}")){
             $_SESSION['firstname'] = $user['userfname'];
-            $_SESSION['firstname'] = $user['userlname'];
+            $_SESSION['lastname'] = $user['userlname'];
             $_SESSION["user"] = $user['username'];
             
             if($_SESSION["user"] === "admin"){
