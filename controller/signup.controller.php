@@ -1,8 +1,9 @@
 <?php
-if(!isset($_SESSION['user'])){
+/*if(!isset($_SESSION['user'])){
     header("Location: index.php");
-}elseif($_SESSION['user'] == 'admin' && $_SERVER['REQUEST_METHOD'] == 'POST'){
+}elseif($_SESSION['user'] == 'admin' && $_SERVER['REQUEST_METHOD'] == 'POST'){*/
     //add check for post message with set user variables;
+    
     require "models/signup.model.php";
     
     $signupMOD = new signupModel();
@@ -10,17 +11,57 @@ if(!isset($_SESSION['user'])){
     if($signupMOD->userExist($_POST['username'])){
         print "User name already in use";
     }else{
-        //validate user data
-        $result = $signupMOD->addUser($_POST['firstname'], $_POST['lastname'], $_POST['username'], $_POST['signpass']);
+        //packaging user data
+        $userData = ["firstname" => $_POST['firstname'], "lastname" =>  $_POST['lastname'], "username" => $_POST['username'], "signpass" => $_POST['signpass']];
+        //data sanitation
+        $userData = sanitation($userData);
+        
+        userDataValidation($userData);
+        
+        $result = $signupMOD->addUser($userData['firstname'], $userData['lastname'], $userData['username'], $userData['signpass']);
         
         if($result){
             print "User Successfuly added";
         }else{
             print "User Not added";
         }
+    } 
+    
+/*}else{
+    header("Location: index.php");
+}*/
+
+function userDataValidation($userData){
+    if(isset($userData['firstname'],$userData['lastname'], 
+    $userData['username'], $userData['signpass']) 
+    && !empty($userData['firstname']) && !empty($userData['lastname']) 
+    && !empty($userData['username']) && !empty($userData['signpass']) ){
+        $noSpecialChar = "/[-!$%^&*()_+|~=`{}\[\]:\";'<>?,.\/]/";
+        $passwordReg = "/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/";
+        if(preg_match($noSpecialChar, $userData['firstname'])){
+            echo 'Fistname, lastname and username should only have lowercase letters, uppercase letter and numbers';
+            die();
+        }elseif(preg_match($noSpecialChar, $userData['lastname'])){
+            echo 'Fistname, lastname and username should only have lowercase letters, uppercase letter and numbers';
+            die();
+        }elseif(preg_match($noSpecialChar, $userData['username'])){
+            echo 'Fistname, lastname and username should only have lowercase letters, uppercase letter and numbers';
+            die();
+        }elseif(!preg_match($passwordReg, $userData['signpass'])){
+            echo "Password should be 8 charachters in legnth, containing at least 1 digit and 1 capital letter";
+            die();
+        }
+    }else{
+        echo "Please fill in all fields";
+        die();
+    }
+}
+
+function sanitation($userData){
+    
+    foreach($userData as $key => $data){
+        $userData[$key] = strip_tags($data);
     }
     
-    
-}else{
-    header("Location: index.php");
+    return $userData;
 }
