@@ -1,5 +1,7 @@
 <?php
 $routes = ["index.php" => "controller/index.controller.php",
+'logo.png' => 'views/partials/logo.png',
+"/" => "controller/index.controller.php",
 "home" => "controller/home.controller.php",
 'login' => "views/login.view.php",
 'logout' => "controller/logout.controller.php",
