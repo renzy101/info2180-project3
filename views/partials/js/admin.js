@@ -94,7 +94,7 @@ $(document).ready(function(){
                      alert(response);
                      clearFields();
                  },
-                 failure:function(response){
+                 failure: function(response){
                      alert(response);
                  }
             });
