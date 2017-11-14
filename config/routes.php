@@ -8,9 +8,9 @@ $routes = ["index.php" => "controller/index.controller.php",
 'log' => 'controller/login.controller.php',
 'admin' => 'controller/admin.controller.php',
 'signup' => 'controller/signup.controller.php',
-'login.css' => 'views/partials/login.css',
-'admin.css' => "views/partials/admin.css",
-'admin.js' => "views/partials/admin.js",
+'login.css' => 'views/partials/css/login.css',
+'admin.css' => "views/partials/css/admin.css",
+'admin.js' => "views/partials/js/admin.js",
 'favicon.ico' => 'favicon.ico',
 "404" => "views/error404.view.php"
 ];
