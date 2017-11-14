@@ -7,7 +7,7 @@
 	<div class= "body">
 	    <div class="content">
 	    	<div class="nav-bar"></div>
-	    	<form class="login-form buttons">
+	    	<form id="newUser" class="login-form buttons">
 	    		<div class="signup-login button">
 	    			<button class="signup">Add New User</button>
 	    			<button class="signup logout">Logout</button>
@@ -19,10 +19,9 @@
 	    			<label>Password:<br><input class="required" type="password" name="signpass" required></label><br>
 	    		</div>
 	    		<div class="form-signup hidden">
-	    			<label>Confirm Password:<br><input class="required" type="password" required></label><br>
-	    			<label><input class="checkbox required" type="checkbox" required> I accept the terms of service </label>
+	    			<label>Confirm Password:<br><input id="cpass" class="required" type="password" name="cpass" required></label><br>
 	    		</div>
-	    		<button class="submit signup hidden">Submit User</button>
+	    		<button id="addnew" class="submit signup hidden">Submit User</button>
 	    	</form>
 		</div>
 	</<div>
