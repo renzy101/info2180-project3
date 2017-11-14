@@ -1,10 +1,11 @@
 <?php
-/*if(!isset($_SESSION['user'])){
+session_start();
+if(!isset($_SESSION['user'])){
     header("Location: index.php");
-}elseif($_SESSION['user'] == 'admin' && $_SERVER['REQUEST_METHOD'] == 'POST'){*/
-    //add check for post message with set user variables;
+}elseif($_SESSION['user'] == 'admin' && $_SERVER['REQUEST_METHOD'] == 'POST'){
     
     require "models/signup.model.php";
+    require "controller/sanitation.php";
     
     $signupMOD = new signupModel();
     
@@ -27,9 +28,9 @@
         }
     } 
     
-/*}else{
+}else{
     header("Location: index.php");
-}*/
+}
 
 function userDataValidation($userData){
     if(isset($userData['firstname'],$userData['lastname'], 
@@ -55,13 +56,4 @@ function userDataValidation($userData){
         echo "Please fill in all fields";
         die();
     }
-}
-
-function sanitation($userData){
-    
-    foreach($userData as $key => $data){
-        $userData[$key] = strip_tags($data);
-    }
-    
-    return $userData;
 }
