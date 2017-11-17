@@ -35,10 +35,18 @@ class signupModel{
             $userInsert->bindParam(':pass', $signpass, PDO::PARAM_STR);
             
             if($userInsert->execute()){
-                return true;
+                $userFolder = "users/{$username}";
+                if(is_dir("users") === false){
+                    mkdir("users");
+                }
+                if(is_dir($userFolder) === false){
+                    mkdir($userFolder);
+                    return true;
+                }
             }
             return false;
         }catch(Exception $e){
+            $this->connector->rollback();
             return false;
         }
     }
