@@ -41,12 +41,12 @@ class signupModel{
                 }
                 if(is_dir($userFolder) === false){
                     mkdir($userFolder);
+                    mkdir($userFolder."/sent");
                     return true;
                 }
             }
             return false;
         }catch(Exception $e){
-            $this->connector->rollback();
             return false;
         }
     }
