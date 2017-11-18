@@ -2,7 +2,7 @@
 function sanitation($userData){
     
     foreach($userData as $key => $data){
-        $userData[$key] = strip_tags($data);
+        $userData[$key] = trim(strip_tags($data));
     }
     
     return $userData;

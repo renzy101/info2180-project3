@@ -4,4 +4,4 @@ if(!isset($_SESSION['user'])){
     header ("Location: login");
 }
 
-require 'views/home.view.php';
+require 'views/home.view.html';

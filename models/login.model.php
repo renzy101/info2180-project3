@@ -1,12 +1,8 @@
 <?php
+require 'models/basicModel.php';
 
-class loginModel{
-    private $connector;
-    
-    public function __construct(){
-        $this->connector = require 'models/DBconnector.php';
-    }
-    
+class loginModel extends BasicModel{
+
     public function getUserLoginInfo($user){
         try{
             $selectStatement = $this->connector->prepare('SELECT * from usrs WHERE username = :user');

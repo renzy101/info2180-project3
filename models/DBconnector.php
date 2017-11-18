@@ -10,6 +10,6 @@ try{
     
     return $connector;
 }catch(PDOException $e){
-    echo $e->getMessage();
+    require 'views/error404.view.php';
     die();
 }

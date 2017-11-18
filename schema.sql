@@ -13,7 +13,7 @@ create table messages(
 	recipient_ids varchar(20),
 	sender_id varchar(20),
 	subject varchar(50),
-	body varchar(50),
+	body longtext,
     date_sent datetime,
 	primary key(msgid) 
 );

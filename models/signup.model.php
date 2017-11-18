@@ -1,28 +1,7 @@
 <?php
+require 'models/basicModel.php';
 
-class signupModel{
-    private $connector;
-    
-    public function __construct(){
-        $this->connector = require 'models/DBconnector.php';
-    }
-    
-    public function userExist($user){
-        try{
-            $userQuery = $this->connector->prepare("SELECT username FROM usrs WHERE username = :user");
-            $userQuery->bindParam(':user', $user, PDO::PARAM_STR);
-            $userQuery->execute();
-            $result = $userQuery->fetch(PDO::FETCH_ASSOC);
-            
-            if($result){
-                return true;
-            }
-            return false;
-        }catch(Exception $e){
-            return false;
-        }
-        
-    }
+class signupModel extends BasicModel{
     
     public function addUser($firstname, $lastname, $username, $signpass){
         try{
@@ -35,15 +14,7 @@ class signupModel{
             $userInsert->bindParam(':pass', $signpass, PDO::PARAM_STR);
             
             if($userInsert->execute()){
-                $userFolder = "users/{$username}";
-                if(is_dir("users") === false){
-                    mkdir("users");
-                }
-                if(is_dir($userFolder) === false){
-                    mkdir($userFolder);
-                    mkdir($userFolder."/sent");
-                    return true;
-                }
+                return true;
             }
             return false;
         }catch(Exception $e){

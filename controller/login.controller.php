@@ -10,6 +10,10 @@ if(isset($_POST['username'], $_POST['pass']) && !empty($_POST['username']) && !e
     $loginDetails = ["username" => $_POST['username'], "pass" => $_POST['pass']];
     $loginDetails = sanitation($loginDetails);
     
+    if( $loginMOD->userExist($loginDetails['username']) === false){
+        header("Location: login");
+    }
+    
     $user = $loginMOD->getUserLoginInfo($loginDetails['username']);
     
     if($user !== false){
