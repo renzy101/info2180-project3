@@ -36,6 +36,11 @@ body{
 	    background: red;
 }
 
+#usermessage{
+	color: blue;
+	text-align: center;
+}
+
 .indexcontent{
 	width: 330px;
 	height: 330px;
@@ -146,6 +151,19 @@ body{
 }
 
 .login-form button {
+	width: 120px;
+	height: 50px;
+	border: none;
+	border-radius: 15px;
+	color: #fff;
+	font-weight: 600;
+	position: relative;
+	margin-top: 30px;
+	margin-right: 10px;
+	transition: all .5s ease;
+}
+
+#addnew{
 	width: 120px;
 	height: 50px;
 	border: none;

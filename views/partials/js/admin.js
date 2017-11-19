@@ -21,6 +21,8 @@ $(document).ready(function(){
            for(var i=0;i<$(".signup").length; i++){
                 $(".signup")[i].type = "button";
             }
+            $(".submit")[0].type = "submit";
+            
         
             $('.signup').bind('click', function() {
             
@@ -33,7 +35,8 @@ $(document).ready(function(){
             })
             
             
-            $('#addnew').bind('click',function(){
+            $('#addnew').bind('click',function(event){
+                event.preventDefault();
                var firstname=$("[name='firstname']").val().trim();
                var lastname=$("[name='lastname']").val().trim();
                var username=$("[name='username']").val().trim();
@@ -91,11 +94,11 @@ $(document).ready(function(){
                  type: "POST",
                  data: newUser,
                  success: function(response){
-                     alert(response);
+                     $('#usermessage').text(response);
                      clearFields();
                  },
                  failure: function(response){
-                     alert(response);
+                     $('#usermessage').text(response);
                  }
             });
          }   
