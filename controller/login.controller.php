@@ -7,32 +7,26 @@ if(isset($_POST['username'], $_POST['pass']) && !empty($_POST['username']) && !e
     require 'controller/sanitation.php';
     
     $loginMOD = new loginModel();
-    $loginDetails = ["username" => $_POST['username'], "pass" => $_POST['pass']];
-    $loginDetails = sanitation($loginDetails);
+    $loginDetails = sanitation(["username" => $_POST['username'], "pass" => $_POST['pass']]);
     
-    if( $loginMOD->userExist($loginDetails['username']) === false){
-        header("Location: login");
-    }
-    
-    $user = $loginMOD->getUserLoginInfo($loginDetails['username']);
-    
-    if($user !== false){
+    if( $loginMOD->userExist($loginDetails['username'])){
+        $user = $loginMOD->getUserLoginInfo($loginDetails['username']);
+        
         if($user['username'] === $_POST['username'] && password_verify( $loginDetails['pass'], "{$user['userpassword']}")){
             $_SESSION['firstname'] = $user['userfname'];
             $_SESSION['lastname'] = $user['userlname'];
             $_SESSION["user"] = $user['username'];
             
             if($_SESSION["user"] === "admin"){
-                header("Location: admin");
+                echo 1;
+                die();
             }else{
-                header("Location: home");
+                echo 2;
+                die();
             }
-        }else{
-            header("Location: login");
         }
-    }else{
-        header("Location: login");
     }
+    echo "User name or password is incorrect";
 }else{
     header("Location: login");
 }

@@ -63,6 +63,10 @@ header{
 	color: #b20000!important;
 }
 
+#message{
+	color: #b20000!important
+}
+
 .login{
 	position: absolute;
 	top: calc(50% - 75px);

@@ -1,16 +1,20 @@
 <?php require 'partials/header.html'?>
 <link rel="stylesheet" type="text/css" href="login.css" />
+<script src="login.js" type="text/javascript"></script>
 <div class="body"></div>
 		<div class="grad"></div>
 		<div class="header">
 			<div>Cheapo<span>Mail</span></div>
 		</div>
 		<br>
-		<form action="log" method="POST">
+		<form id="loginform">
 		<div class="login">
-			<input type="text" placeholder="username" name="username"><br>
-			<input type="password" placeholder="password" name="pass"><br>
-			<input type="submit" value="Login">
+			<input type="text" placeholder="username" name="username" id="username"><br>
+			<input type="password" placeholder="password" name="pass" id="pass"><br>
+			<input type="submit" value="Login" id="btn">
+			<div>
+				<p id= "message"></p>
+			</div>
 		</div>
 		</form>
 <?php require 'partials/footer.html'?>
