@@ -31,4 +31,16 @@ class MessagingModel extends BasicModel{
         return 'User Does Not Exsist';
     }
     
+    public function recents($user){
+        $recentsQuery = $this->connector->prepare("select * from messages where recipient_ids in (select userid from usrs where username = :user) order by msgid desc limit 10;");
+        $recentsQuery->bindParam(':user', $user, PDO::PARAM_STR);
+        $recentsQuery->execute();
+        $results = $recentsQuery->fetchAll(PDO::FETCH_ASSOC);
+        
+        if($results){
+            return $results;
+        }
+        return false;
+    }
+
 }

@@ -12,7 +12,8 @@ $routes = ["index.php" => "controller/index.controller.php",
 'login.js' => 'views/partials/js/login.js',
 'admin.css' => "views/partials/css/admin.css",
 'admin.js' => "views/partials/js/admin.js",
-'messaging' => "controller/messaging.controller.php",
+'send' => "controller/send_msg.controller.php",
+'recents' => 'controller/recent_msg.controller.php',
 'favicon.ico' => 'favicon.ico',
 "404" => "views/error404.view.html"
 ];

@@ -23,7 +23,7 @@ class BasicModel{
         
     }
     
-    protected function getAllUserInfo($user){
+    public function getAllUserInfo($user){
         if($this->userExist($user)){
             try{
                 $selectStatement = $this->connector->prepare('SELECT * from usrs WHERE username = :user');
@@ -39,5 +39,14 @@ class BasicModel{
             }
         }
         return false;
+    }
+    
+    public function usernameByID($userID){
+        $usernameQuery = $this->connector->prepare('select username from usrs where userid = :userid');
+        $usernameQuery->bindParam(':userid',$userID,PDO::PARAM_STR);
+        $usernameQuery->execute();
+        $user =  $usernameQuery->fetch(PDO::FETCH_ASSOC);
+        
+        return $user['username'];
     }
 }

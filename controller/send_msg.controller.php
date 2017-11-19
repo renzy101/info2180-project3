@@ -1,7 +1,7 @@
 <?php
 session_start();
-/*
-if(isset($_SESSION['user']) && $_SERVER['REQUEST_METHOD'] ==='POST'){*/
+
+if(isset($_SESSION['user']) && $_SERVER['REQUEST_METHOD'] ==='POST'){
     require 'models/messaging.model.php';
     require 'controller/sanitation.php';
     require 'controller/verification.php';
@@ -16,10 +16,8 @@ if(isset($_SESSION['user']) && $_SERVER['REQUEST_METHOD'] ==='POST'){*/
     $messagingMOD = new MessagingModel();
     
     echo $messagingMOD->sendMessage('shadow',$messageData);
-    
-    //call messaging models
-    //send response based on model return value
-/*}else{
+
+}else{
     header('Location: index.php');
-}*/
+}
 
