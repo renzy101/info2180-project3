@@ -10,9 +10,9 @@ $(document).ready(function(){
             data:body
         }).done(function(result){
             if (result == 1){
-                window.location.replace("admin");
+                $('#mainarea').load("admin");
             }else if(result == 2){
-                window.location.replace("home");
+                $('#mainarea').load("home");
             }
             else{
                 $('#message').text(result);

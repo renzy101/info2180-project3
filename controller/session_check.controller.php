@@ -3,10 +3,13 @@ session_start();
 //redirects user to login view if session is not set
 
 if(!isset($_SESSION['user'])){
-    header ("Location: login");
+    echo 0;
+    die();
 }else if ($_SESSION['user'] == "admin"){
-    header("Location: admin");
+    echo 1;
+    die();
 }else{
-    header("Location: home");
+    echo 2;
+    die();
 }
 

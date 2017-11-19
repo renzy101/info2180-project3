@@ -15,7 +15,12 @@ $(document).ready(function(){
         
            // })
            $('.logout').bind('click',function(){
-               window.location.assign("logout")
+               $.ajax({
+                   url: 'logout',
+                   method: 'POST'
+               }).done(function(result){
+                   $('#mainarea').load('login');
+               });
            });
            
            for(var i=0;i<$(".signup").length; i++){

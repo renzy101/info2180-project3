@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['user'])){
-    header("Location: index.php");
+    header('Location: /');
 }elseif($_SESSION['user'] == 'admin' && $_SERVER['REQUEST_METHOD'] == 'POST'){
     
     require "models/signup.model.php";
@@ -30,6 +30,6 @@ if(!isset($_SESSION['user'])){
     } 
     
 }else{
-    header("Location: index.php");
+    header('Location: /');
 }
 
