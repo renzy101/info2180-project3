@@ -12,7 +12,7 @@ if(isset($_POST['username'], $_POST['pass']) && !empty($_POST['username']) && !e
     if( $loginMOD->userExist($loginDetails['username'])){
         $user = $loginMOD->getUserLoginInfo($loginDetails['username']);
         
-        if($user['username'] === $_POST['username'] && password_verify( $loginDetails['pass'], "{$user['userpassword']}")){
+        if($user['username'] === $loginDetails['username'] && password_verify( $loginDetails['pass'], "{$user['userpassword']}")){
             $_SESSION['firstname'] = $user['userfname'];
             $_SESSION['lastname'] = $user['userlname'];
             $_SESSION["user"] = $user['username'];
