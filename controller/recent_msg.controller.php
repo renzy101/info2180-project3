@@ -5,7 +5,7 @@ if(isset($_SESSION['user']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
     require 'models/messaging.model.php';
     
     $messagingMOD = new MessagingModel();
-    $messages = $messagingMOD->recents($_SESSION['user']);
+    $messages = $messagingMOD->recents('momo');
     
     if($messages){
         $response = '<?xml version="1.0"  encoding="UTF-8"?><messages>';
@@ -15,7 +15,8 @@ if(isset($_SESSION['user']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
             }else{
                 $read = 0;
             }
-            $response.= "<message id = '{$message['msgid']}' sender = '{$messagingMOD->usernameByID($message['sender_id'])}' subject = '{$message['subject']}' date = '{$message['date_sent']}' read = '{$read}'>";
+            $sender = $messagingMOD->userInfoByID($message['sender_id']);
+            $response.= "<message id = '{$message['msgid']}' fname = '{$sender['userfname']}' lname = '{$sender['userlname']}' sender = '{$sender['username']}' subject = '{$message['subject']}' date = '{$message['date_sent']}' read = '{$read}'>";
             $response.= $message['body'];
             $response.= '</message>';
         }
