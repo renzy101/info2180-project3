@@ -54,5 +54,21 @@ class MessagingModel extends BasicModel{
         return false;
     }
     
-    
+    public function markMessageRead($msgid){
+        $messageQuery = $this->connector->prepare('SELECT * FROM messages WHERE msgid = :ms_id');
+        $messageQuery->bindParam(':ms_id', $msgid, PDO::PARAM_STR);
+        $messageQuery->execute();
+        
+        $message = $messageQuery->fetch(PDO::FETCH_ASSOC);
+        if($message){
+            $readQuery = $this->connector->prepare('INSERT INTO messages_read(msgid,reader_id) VALUES(:msgid, :reader_id)');
+            $readQuery->bindParam(':msgid', $msgid, PDO::PARAM_STR);
+            $readQuery->bindParam(':reader_id', $message['recipient_ids'], PDO::PARAM_STR);
+            
+            if($readQuery->execute()){
+                return true;
+            }
+        }
+        return false;
+    }
 }
