@@ -5,7 +5,7 @@ if(isset($_SESSION['user']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
     require 'models/messaging.model.php';
     
     $messagingMOD = new MessagingModel();
-    $messages = $messagingMOD->recents('momo');
+    $messages = $messagingMOD->recents($_SESSION['user']);
     
     if($messages){
         $response = '<?xml version="1.0"  encoding="UTF-8"?><messages>';
