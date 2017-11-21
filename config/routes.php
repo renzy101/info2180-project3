@@ -18,6 +18,7 @@ $routes = [
 'recents' => 'controller/recent_msg.controller.php',
 'admin' => 'controller/admin.controller.php',
 "home" => "controller/home.controller.php",
+'read' => 'controller/read.controller.php',
 
 //JS
 'login.js' => 'views/partials/js/login.js',
