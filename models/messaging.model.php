@@ -42,5 +42,17 @@ class MessagingModel extends BasicModel{
         }
         return false;
     }
-
+    
+    public function is_read($messageID){
+        $queryString = $this->connector->prepare('SELECT msg_rid FROM messages_read WHERE msg_rid = :msgid');
+        $queryString->bindParam(':msgid', $messageID, PDO::PARAM_STR);
+        $queryString->execute();
+        
+        if($queryString->fetch()){
+            return true;
+        }
+        return false;
+    }
+    
+    
 }

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(isset($_SESSION['user'])){
+if(isset($_SESSION['user']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
     require 'models/messaging.model.php';
     
     $messagingMOD = new MessagingModel();
@@ -10,7 +10,12 @@ if(isset($_SESSION['user'])){
     if($messages){
         $response = '<?xml version="1.0"  encoding="UTF-8"?><messages>';
         foreach($messages as $message){
-            $response.= "<message id = '{$message['msgid']}' sender = '{$messagingMOD->usernameByID($message['sender_id'])}' subject = '{$message['subject']}' date = '{$message['date_sent']}'>";
+            if($messagingMOD->is_read($message['msgid'])){
+                $read = 1;
+            }else{
+                $read = 0;
+            }
+            $response.= "<message id = '{$message['msgid']}' sender = '{$messagingMOD->usernameByID($message['sender_id'])}' subject = '{$message['subject']}' date = '{$message['date_sent']}' read = '{$read}'>";
             $response.= $message['body'];
             $response.= '</message>';
         }
