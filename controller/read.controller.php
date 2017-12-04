@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 if(isset($_SESSION['user'])){
     if(!empty($_POST['msgid'])){
         require 'controller/sanitation.php';

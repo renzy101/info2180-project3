@@ -3,12 +3,13 @@ session_start();
 
 if(isset($_SESSION['user']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
     require 'models/messaging.model.php';
-    
     $messagingMOD = new MessagingModel();
     $messages = $messagingMOD->recents($_SESSION['user']);
-    
+    $data = new \stdClass();
+    $data->message = 'null';
+    $data->data = array();
     if($messages){
-        $response = '<?xml version="1.0"  encoding="UTF-8"?><messages>';
+        $data->message = 'true';
         foreach($messages as $message){
             if($messagingMOD->is_read($message['msgid'])){
                 $read = 1;
@@ -16,17 +17,13 @@ if(isset($_SESSION['user']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
                 $read = 0;
             }
             $sender = $messagingMOD->userInfoByID($message['sender_id']);
-            $response.= "<message id = '{$message['msgid']}' fname = '{$sender['userfname']}' lname = '{$sender['userlname']}' sender = '{$sender['username']}' subject = '{$message['subject']}' date = '{$message['date_sent']}' read = '{$read}'>";
-            $response.= $message['body'];
-            $response.= '</message>';
+            $msg = array('senderid'=>$sender,'msgid'=>$message['msgid'],'fname'=>$sender['userfname'],'lname'=>$sender['userlname'],'username'=>$sender['username'],'subject'=>$message['subject'],'date'=>$message['date_sent'],'seen'=>$read,'body'=>$message['body']);
+            array_push($data->data, $msg);
         }
-        $response.= '</messages>';
-        header('Content-Type: text/xml');
-        $xmlOutput = new SimpleXMLElement($response);
-        print $xmlOutput->asXML();
+        die(json_encode($data));
+
     }else{
-        echo 'Sorry. No messages.';
-        die();
+        die(json_encode($data));
     }
 }else{
     header('Location: index.php');
