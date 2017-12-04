@@ -928,13 +928,11 @@
 
 		<aside id="sidebar" class="nano">
 			<div class="nano-content">
-				<div class="logo-container"><span class="logo glyphicon glyphicon-envelope"></span>Mail</div><a class="compose-button">Compose</a>
+				<div class="logo-container"><a href='#'><img alt='cheampoMail logo' src='logo.png'></img></a></div><a class="compose-button">Compose</a>
 				<menu class="menu-segment">
 					<ul>
 						<li class="active"><a href="#">Inbox</a></li>
-						<li><a href="#">Sent</a></li>
-						<li><a href="#">Drafts</a></li>
-						<li><a href="/logout" id="logout">Logout</a></li>
+						<li><a href="" id="logout">Logout</a></li>
 					</ul>
 				</menu>
 				<div class="separator"></div>
@@ -945,24 +943,13 @@
 		<main id="main">
 			<div class="overlay"></div>
 			<header class="header">
-				<div class="search-box">
-					<input placeholder="Search..."><span class="icon glyphicon glyphicon-search"></span>
-				</div>
 				<h1 class="page-title"><a class="sidebar-toggle-btn trigger-toggle-sidebar"><span class="line"></span><span class="line"></span><span class="line"></span><span class="line line-angle1"></span><span class="line line-angle2"></span></a>Inbox<a><span class="icon glyphicon glyphicon-chevron-down"></span></a></h1>
 			</header>
-			<div class="action-bar">
-				<ul>
-					<li><a class="icon circle-icon glyphicon glyphicon-chevron-down"></a></li>
-					<li><a class="icon circle-icon glyphicon glyphicon-refresh"></a></li>
-					<li><a class="icon circle-icon glyphicon glyphicon-share-alt"></a></li>
-					<li><a class="icon circle-icon red glyphicon glyphicon-remove"></a></li>
-					<li><a class="icon circle-icon red glyphicon glyphicon-flag"></a></li>
-				</ul>
-			</div>
+		
 			<div id="main-nano-wrapper" class="nano">
 				<div class="nano-content">
 					<ul class="message-list">
-					</ul><a href="#" class="load-more-link">Show more messages</a>
+					</ul>
 				</div>
 			</div>
 		</main>
@@ -1016,7 +1003,15 @@
 			/* global jQuery */
 			jQuery(document).ready(function($) {
 				$('#logout').click(function(e) {
-				    window.location = '/logout';
+				    e.preventDefault();
+				    $.ajax({
+				    	url: 'logout',
+				    	method: 'POST'
+				    }).done(function(response){
+				    	if (response == 0){
+				    		$('#mainarea').load('login');
+				    	}
+				    });
 				});
 				var cols = {},
 					messageIsOpen = false,
@@ -1064,88 +1059,95 @@
 			
 				let receiver = {recip:null,subject:null,message:null,from:null};
 				// When you click on a message, show it
-			    $.ajax({
-					method: 'POST',
-					url: "recents",
-					data: {key:'XCX-17'} //not necessary
-					
-				}).done(function(res) {
-					res = $.parseJSON(res);
-					if(res.message === 'true'){
-						let data = res.data;
-						let l = data.length;
+				let msgcount = 0;
+				getMessages();
+				function getMessages(){
+				    $.ajax({
+						method: 'POST',
+						url: "recents",
+						data: {key:'XCX-17'} //not necessary
 						
-						for(var i =  0; i < l; i++){
-							let msg = data[i];
-							let li = null;
-							let div1 = $('<div></div>',{
-								class:"col col-1"
-							});
-							let span = $('<span></span>',{
-								class:"dot"
-							});
-							let div2 = $('<div></div>',{
-								class:"checkbox-wrapper"
-							});
-							let input = $('<input />',{
-								type: 'checkbox',
-								class:"checkbox"
-							});
-							let label = $('<label></label>',{
-								class:"toggle"
-							});
-							let title = $('<p></p>',{
-								class:"title",
-								text:msg.username
-							});
-							let div3 = $('<div></div>',{
-								class:"star-star-toggle glyphicon glyphicon-star-empty"
-							});
-							let div4 = $('<div></div>',{
-								class:"col col-2"
-							});
-							let subject = $('<div></div>',{
-								class:"subject",
-								text: msg.subject
-							});
-							let date = $('<div></div>',{
-								class:"date",
-								text: msg.date.split(' ')[0]
-							});
-							// console.log(msg);
-							if(msg.seen == 0){
-								li = $('<li></li>',{
-									class: 'unread',
-									id: msg.msgid
+					}).done(function(res) {
+						res = $.parseJSON(res);
+						// console.log(res);
+						// return 0;
+						setInterval(getMessages,5000);
+						
+						if(res.message === 'true'){
+							$(".message-list").empty();
+							let data = res.data;
+							let l = data.length;
+							for(var i =  0; i < l; i++){
+								let msg = data[i];
+								let li = null;
+								let div1 = $('<div></div>',{
+									class:"col col-1"
 								});
-								li.bind('click', readmsg);
-							}else{
-								li = $('<li></li>',{
-									class: 'read',
-									id: msg.msgid
+								let span = $('<span></span>',{
+									class:"dot"
 								});
+								let div2 = $('<div></div>',{
+									class:"checkbox-wrapper"
+								});
+								let input = $('<input />',{
+									type: 'checkbox',
+									class:"checkbox"
+								});
+								let label = $('<label></label>',{
+									class:"toggle"
+								});
+								let title = $('<p></p>',{
+									class:"title",
+									text:msg.username
+								});
+								let div3 = $('<div></div>',{
+									class:"star-star-toggle glyphicon glyphicon-star-empty"
+								});
+								let div4 = $('<div></div>',{
+									class:"col col-2"
+								});
+								let subject = $('<div></div>',{
+									class:"subject",
+									text: msg.subject
+								});
+								let date = $('<div></div>',{
+									class:"date",
+									text: msg.date.split(' ')[0]
+								});
+								// console.log(msg);
+								if(msg.seen == 0){
+									li = $('<li></li>',{
+										class: 'unread',
+										id: msg.msgid
+									});
+									li.bind('click', readmsg);
+								}else{
+									li = $('<li></li>',{
+										class: 'read',
+										id: msg.msgid
+									});
+								}
+								
+								usrmsg[msg.msgid] = msg;
+								span.appendTo(div1);
+								input.appendTo(div2);
+								label.appendTo(div2);
+								div2.appendTo(div1);
+								title.appendTo(div1);
+								div3.appendTo(div1);
+								div1.appendTo(li);
+								subject.appendTo(div4);
+								date.appendTo(div4);
+								div4.appendTo(li);
+								li.appendTo('.message-list');
+								li.bind('click', showMessage);
 							}
-							
-							usrmsg[msg.msgid] = msg;
-							span.appendTo(div1);
-							input.appendTo(div2);
-							label.appendTo(div2);
-							div2.appendTo(div1);
-							title.appendTo(div1);
-							div3.appendTo(div1);
-							div1.appendTo(li);
-							subject.appendTo(div4);
-							date.appendTo(div4);
-							div4.appendTo(li);
-							li.appendTo('.message-list');
-							li.bind('click', showMessage);
 						}
-					}
-					else{
-						//do nothing or you can add something there
-					}
-				});
-				
+						else{
+							//do nothing or you can add something there
+						}
+					});
+				}
 				function readmsg(){
 					$(this).unbind('click', readmsg);
 					let messageid = $(this).attr('id');
@@ -1158,6 +1160,7 @@
 					
 					}).done(function(res) {
 						// do something if oyu wish
+						
 					});
 				}
 				
@@ -1209,6 +1212,18 @@
 						}
 					}
 				});
+				function updateMessages(){
+					$.ajax({
+						method: 'POST',
+						url: "recents",
+						data: {key:null}
+					
+					}).done(function(res){
+					    console.log($.parseJSON(res));
+					    msgcount += parseInt(res.messagecount);
+					    console.log(msgcount);
+					});
+				}
 				function showMessage(e) {
 					//{senderid: "XCX-17", msgid: "456", fname: "Milton", lname: "Edwards", username: "ACCESS", …}
 					

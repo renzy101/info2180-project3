@@ -2,6 +2,7 @@
 $routes = [
 //images
 'favicon.ico' => 'favicon.ico',
+'logo.png' => 'logo.png',
 
 //views
 "index.php" => "views/main.view.html",

@@ -53,17 +53,7 @@ class MessagingModel extends BasicModel{
         }
         return false;
     }
-    public function getMore($user,$offset){
-        $recentsQuery = $this->connector->prepare("select * from messages where recipient_ids in (select userid from usrs where username = :user) order by msgid desc limit 10 offset :offset;");
-        $recentsQuery->bindParam(':user', $user, PDO::PARAM_STR);
-        $recentsQuery->execute();
-        $results = $recentsQuery->fetchAll(PDO::FETCH_ASSOC);
-        
-        if($results){
-            return $results;
-        }
-        return false;
-    }
+
     public function is_read($messageID){
         $queryString = $this->connector->prepare('SELECT msgid FROM messages_read WHERE msgid = :msgid');
         $queryString->bindParam(':msgid', $messageID, PDO::PARAM_STR);

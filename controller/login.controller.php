@@ -26,7 +26,6 @@ if(isset($_POST['username'], $_POST['pass']) && !empty($_POST['username']) && !e
             }
         }
     }
-    echo "User name or password is incorrect";
-}else{
-    header("Location: login");
 }
+
+echo "User name or password is incorrect";
